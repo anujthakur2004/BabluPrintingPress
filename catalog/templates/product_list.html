@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+{% block title %}<title>{{ subcategory.name }} | Bablu Printing Press</title>{% endblock %}
+
+{% block content %}
+<div class="container my-5">
+
+  <h1 class="mb-4">{{ subcategory.name }}</h1>
+
+  <div class="row g-4">
+    {% for product in products %}
+    <div class="col-md-3 col-sm-6">
+      <div class="product-card h-100">
+      <a href="{% url 'catalog:product_detail' product.slug %}" class="text-decoration-none text-dark">
+
+        <div class="product-media">
+          {% with product.images.first as img %}
+            {% if img %}
+              <img src="{{ img.image.url }}" alt="{{ product.name }}">
+            {% else %}
+              {% with product.videos.first as vid %}
+                {% if vid %}
+                  <video muted autoplay loop playsinline>
+                    <source src="{{ vid.video.url }}" type="video/mp4">
+                  </video>
+                {% endif %}
+              {% endwith %}
+            {% endif %}
+          {% endwith %}
+        </div>
+
+        <div class="p-3 text-center">
+          <h6 class="product-title">{{ product.name }}</h6>
+          <p class="product-price">₹{{ product.starting_price }}</p>
+        </div>
+
+      </a>
+    </div>
+    </div>
+    {% empty %}
+      <p>No products found.</p>
+    {% endfor %}
+  </div>
+
+</div>
+{% endblock %}

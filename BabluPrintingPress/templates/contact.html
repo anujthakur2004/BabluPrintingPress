@@ -1,0 +1,88 @@
+{% extends "base.html" %}
+{% block title %}
+<title>Contact Us | Bablu Printing Press</title>
+{% endblock %}
+{% block content %}
+
+{% if messages %}
+  {% for message in messages %}
+    <div class="alert alert-success mb-4">
+      {{ message }}
+    </div>
+  {% endfor %}
+{% endif %}
+
+<section class="contact-page">
+  <div class="container">
+
+    <!-- PAGE HEADER -->
+    <div class="contact-header">
+      <h1>Contact Us</h1>
+      <p>
+        Have a question or want to place an order?
+        Get in touch with us — we’re happy to help.
+      </p>
+    </div>
+
+    <div class="row contact-content">
+
+      <!-- CONTACT INFO -->
+      <div class="col-md-5">
+        <div class="contact-box">
+          <h5>Bablu Printing Press</h5>
+
+          <p>
+            📍 Joginder Nagar, Rama Mandi, Jalandhar, Punjab 144006.<br>
+            📞 +91 94170-44419<br>
+            📧 babluprintingpress@gmail.com
+          </p>
+
+          <a
+            href="https://wa.me/919417044419"
+            target="_blank"
+            class="btn btn-success mt-2">
+            WhatsApp Us
+          </a>
+        </div>
+      </div>
+
+      <!-- CONTACT FORM -->
+      <div class="col-md-7">
+        <div class="contact-box">
+          <form method="POST">
+  {% csrf_token %}
+
+  <div class="row">
+    <div class="col-md-6 mb-3">
+      <input type="text" name="name" class="form-control" placeholder="Your Name" required>
+    </div>
+
+    <div class="col-md-6 mb-3">
+      <input type="tel" name="phone" class="form-control" placeholder="Phone Number" required>
+    </div>
+
+    <div class="col-12 mb-3">
+      <input type="email" name="email" class="form-control" placeholder="Email Address">
+    </div>
+
+    <div class="col-12 mb-3">
+      <textarea name="message" class="form-control" rows="4" placeholder="Your Message" required></textarea>
+    </div>
+
+    <div class="col-12">
+      <button type="submit" class="btn btn-dark px-4">
+        Send Message
+      </button>
+    </div>
+  </div>
+</form>
+
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+</section>
+
+{% endblock %}

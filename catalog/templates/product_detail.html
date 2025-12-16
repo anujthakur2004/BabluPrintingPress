@@ -1,0 +1,84 @@
+{% extends "base.html" %}
+{% block title %}
+<title>{{ product.name }} | Bablu Printing Press</title>
+{% endblock %}
+
+{% block content %}
+<div class="container py-5">
+  <div class="row g-5 align-items-start">
+
+    <!-- LEFT: MEDIA -->
+    <div class="col-md-6">
+      <div class="product-detail-media">
+       <div class="product-detail-media">
+
+  {% if product.videos.exists %}
+    <video class="w-100 rounded" controls autoplay muted loop>
+      <source src="{{ product.videos.first.video.url }}" type="video/mp4">
+    </video>
+
+  {% elif product.images.exists %}
+    <img src="{{ product.images.first.image.url }}"
+         class="img-fluid rounded"
+         alt="{{ product.name }}">
+
+  {% else %}
+    <div class="text-muted text-center p-5">
+      No preview available
+    </div>
+  {% endif %}
+
+</div>
+
+      </div>
+    </div>
+
+    <!-- RIGHT: INFO -->
+    <div class="col-md-6">
+
+      <h1 class="product-detail-title">{{ product.name }}</h1>
+
+      <div class="product-detail-price">
+        ₹{{ product.starting_price }}
+      </div>
+
+      <p class="product-detail-desc">
+        Share your special moments with a beautifully designed mobile video invitation,
+        customized just for your wedding celebrations.
+      </p>
+
+      <div class="product-steps">
+        <h6>Information required after order:</h6>
+        <ul>
+          <li>Groom & Bride Names (with surname)</li>
+          <li>Number of functions in the video</li>
+          <li>Date, day & time of function</li>
+          <li>Venue / Address</li>
+          <li>Family background details</li>
+          <li>RSVP details (optional)</li>
+          <li>Contact numbers</li>
+        </ul>
+      </div>
+
+      <!-- CTA BOX -->
+      <div class="product-cta">
+        <a href="https://wa.me/919417044419?text=I am interested in {{ product.name }}"
+           class="btn btn-success btn-lg w-100 mb-2">
+          <i class="bi bi-whatsapp"></i> WhatsApp Enquiry
+        </a>
+
+        <p class="text-center small text-muted mt-2">
+          Can’t use WhatsApp?
+          <br>
+          Email us at
+          <a href="mailto:babluprintingpress@gmail.com">
+            babluprintingpress@gmail.com
+          </a>
+        </p>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+{% endblock %}

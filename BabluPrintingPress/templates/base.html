@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  {% load static %}
+  <link rel="stylesheet" href="{% static 'css/style.css' %}">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css" rel="stylesheet">
+  <link rel="icon" href="{% static 'favicon/favicon.ico' %}">
+  <link rel="apple-touch-icon" href="{% static 'favicon/favicon-180x180.png' %}">
+  <link rel="icon" type="image/png" sizes="32x32" href="{% static 'favicon/favicon-32x32.png' %}">
+  <link rel="icon" type="image/png" sizes="16x16" href="{% static 'favicon/favicon-16x16.png' %}">
+  
+  {% block title %}
+    <title>Bablu Printing Press</title>
+  {% endblock title %}
+</head>
+<body>
+  <div class="page-wrapper">
+  <div class="top-header">
+  <div class="container-fluid px-4 d-flex justify-content-between align-items-center">
+    <span class="top-left">
+      <i class="bi bi-globe"></i>
+      We ship across the world
+    </span>
+
+    <a href="/contact/" class="top-right">
+      <i class="bi bi-envelope"></i>
+      Contact Us
+    </a>
+  </div>
+</div>
+
+
+<nav class="navbar navbar-expand-lg navbar-light bg-white border-bottom animated-navbar">
+
+  <div class="container-fluid d-flex align-items-center">
+
+    <!-- LEFT LINKS -->
+    <ul class="navbar-nav flex-row fw-medium" style="flex: 1; gap: 1.5rem;">
+      <li class="nav-item">
+        <a class="nav-link active" href="/">Home</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="/wedding-cards/">Wedding Cards</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="/business-essentials/">Business Essentials</a>
+      </li>
+      <li class="nav-item">
+          <a class="nav-link" href="/catalog/video-invitations/">Video Invitations</a>
+      </li>
+    </ul>
+
+    <!-- CENTER LOGO -->
+    <a class="navbar-brand position-absolute start-50 translate-middle-x" href="/">
+      <img src="{% static 'logo.png' %}" alt="Bablu Printing Press" height="65">
+    </a>
+
+    <!-- RIGHT ICONS -->
+    <div class="d-flex align-items-center gap-3" style="flex: 1; justify-content: flex-end;">
+      <span class="nav-icon">&#128269;</span> <!-- Search -->
+      
+    </div>
+
+  </div>
+</nav>
+
+
+
+  <main class="page-content">
+    {% block content %}
+    {% endblock content %}
+    <a
+      href="https://wa.me/919417044419?text=Hello%20Bablu%20Printing%20Press,%20I%20would%20like%20to%20enquire."
+      class="whatsapp-float"
+      target="_blank"
+      aria-label="Chat on WhatsApp"
+    >
+      <i class="bi bi-whatsapp"></i>
+    </a>
+
+  </main>
+
+<footer class="lux-footer">
+  <div class="container footer-container">
+
+    <div class="row footer-main">
+
+      <!-- BRAND -->
+      <div class="col-md-3 footer-brand">
+        <img src="{% static 'logo.png' %}" height="85" class="mb-3">
+        <p class="footer-desc">
+          Premium wedding & business printing solutions crafted with precision
+          and elegance.
+        </p>
+      </div>
+
+      <!-- SHOP -->
+      <div class="col-md-3">
+        <h6 class="footer-heading">SHOP</h6>
+        <ul class="footer-list">
+          <li><a href="#">Wedding Cards</a></li>
+          <li><a href="#">Business Cards</a></li>
+          <li><a href="#">Flyers</a></li>
+          <li><a href="#">Menus</a></li>
+        </ul>
+      </div>
+
+      <!-- EXPLORE -->
+      <div class="col-md-3">
+        <h6 class="footer-heading">EXPLORE</h6>
+        <ul class="footer-list">
+          <li><a href="/our-story/">Our Story</a></li>
+          <li><a href="/visit-us/">Visit Us</a></li>
+          <li><a href="/contact/">Contact Us</a></li>
+        </ul>
+      </div>
+
+      <!-- MORE -->
+      <div class="col-md-3">
+        <h6 class="footer-heading">MORE</h6>
+        <ul class="footer-list">
+          <li><a href="/privacy-policy/">Privacy Policy</a></li>
+          <li><a href="/refund-policy/">Refund Policy</a></li>
+          <li><a href="/shipping-policy/">Shipping Policy</a></li>
+        </ul>
+
+        <div class="footer-social mt-3">
+          <a href="https://www.facebook.com/" target="_blank" aria-label="Facebook">
+            <i class="bi bi-facebook"></i>
+          </a>
+          <a href="https://www.instagram.com/" target="_blank" aria-label="Instagram">
+            <i class="bi bi-instagram"></i>
+          </a>
+        </div>
+
+
+    </div>
+
+    <!-- BOTTOM -->
+    <div class="footer-bottom">
+      © 2025 Bablu Printing Press. All rights reserved.
+    </div>
+
+  </div>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+  </div><!-- /.page-wrapper -->
+  
+</body>
+</html>
