@@ -22,8 +22,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = 'django-insecure-+os4#=5onpvp^o9kz29&=6wlax!#32u=&gcs%6_$l!o7@lrmhk'
 
-# SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+
 
 ALLOWED_HOSTS = []
 
@@ -120,8 +119,14 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/6.0/howto/static-files/
 
-STATIC_URL = 'static/'
-STATICFILES_DIRS = [BASE_DIR / 'BabluPrintingPress' / 'static']
+STATIC_URL = "/static/"
+
+STATICFILES_DIRS = [    
+    BASE_DIR / "static",
+]
+
+STATIC_ROOT = BASE_DIR / "staticfiles"
+
 MEDIA_URL = "/media/"
 MEDIA_ROOT = BASE_DIR / "media"
 
@@ -158,3 +163,10 @@ JAZZMIN_SETTINGS = {
 
     "theme": "lumen", 
 }
+DEBUG = False
+
+ALLOWED_HOSTS = [
+    "139.59.90.122",
+    "babluprintingpress.live",
+    "www.babluprintingpress.live",
+]
