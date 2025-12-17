@@ -14,9 +14,13 @@
   </div>
 
   <div class="row g-4">
-    <!-- Sidebar - Filters -->
+    <!-- Sidebar - Filters (collapsible on mobile) -->
     <div class="col-lg-3">
-      <div class="border rounded p-4">
+      <!-- Mobile toggle button -->
+      <button class="btn btn-outline-secondary w-100 d-lg-none mb-3" type="button" data-bs-toggle="collapse" data-bs-target="#mobileFilters" aria-expanded="false" aria-controls="mobileFilters">
+        Filters & Sort
+      </button>
+      <div id="mobileFilters" class="border rounded p-4 collapse d-lg-block">
         <h5 class="fw-semibold mb-4">Filters</h5>
 
         <!-- Price Filter -->
@@ -42,7 +46,7 @@
         <hr>
 
         <!-- Sort Options -->
-        <div>
+        <div class="mt-3">
           <h6 class="fw-semibold mb-3">Sort By</h6>
           <form method="get">
             {% for sort_value, sort_label in sort_options %}

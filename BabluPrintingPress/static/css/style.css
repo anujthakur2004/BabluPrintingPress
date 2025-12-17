@@ -85,6 +85,13 @@ html, body{
   color: #c00000;
 }
 
+/* Mobile navbar tuning */
+@media (max-width: 576px) {
+  .animated-navbar { padding: 8px 0; }
+  .navbar-brand img { height: 42px !important; }
+  .top-header { font-size: 11px; height: 22px; }
+}
+
 /* ====== TOP HEADER ====== */
 .top-header{
   background:#2f2f2f;
@@ -476,6 +483,11 @@ main {
     max-height: 320px;
   }
 }
+
+/* Product card media height on small screens */
+@media (max-width: 576px) {
+  .product-card-media { height: 160px; }
+}
 body {
     margin: 0;
     font-family: 'Segoe UI', sans-serif;
@@ -853,4 +865,18 @@ body {
         padding: 28px;
         margin-top: 20px;
     }
+}
+
+/* Hero mobile adjustments */
+@media (max-width: 576px) {
+  .hero-section { padding: 48px 0; }
+  .hero-title { font-size: 1.8rem; }
+  .hero-subtitle { font-size: .95rem; max-width: none; }
+  .hero-actions .btn { padding: .5rem .9rem; }
+}
+
+/* Footer mobile spacing */
+@media (max-width: 576px) {
+  .footer-main { padding: 28px 0 20px; }
+  .footer-desc { max-width: none; }
 }
