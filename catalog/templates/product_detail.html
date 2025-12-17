@@ -7,56 +7,97 @@
 <div class="container py-5">
   <div class="row g-5 align-items-start">
 
-    <!-- LEFT: MEDIA -->
-    <div class="col-md-6">
-      <div class="product-detail-media">
-       <div class="product-detail-media">
+   <!-- LEFT: MEDIA -->
+<div class="col-lg-7">
+  <div class="product-media-wrapper">
 
-  {% if product.videos.exists %}
-    <video class="w-100 rounded" controls autoplay muted loop>
-      <source src="{{ product.videos.first.video.url }}" type="video/mp4">
-    </video>
+    {% if product.videos.exists %}
+      <!-- VIDEO -->
+      <div class="media-box">
+        <video class="product-media"
+               controls
+               muted
+               autoplay
+               loop
+               playsinline>
+          <source src="{{ product.videos.first.video.url }}" type="video/mp4">
+        </video>
+      </div>
 
-  {% elif product.images.exists %}
-    <img src="{{ product.images.first.image.url }}"
-         class="img-fluid rounded"
-         alt="{{ product.name }}">
+    {% elif product.images.exists %}
+      <!-- IMAGE CAROUSEL -->
+      <div id="productCarousel"
+           class="carousel slide"
+           data-bs-ride="carousel"
+           data-bs-interval="3000">
 
-  {% else %}
-    <div class="text-muted text-center p-5">
-      No preview available
-    </div>
-  {% endif %}
+        <div class="carousel-inner">
 
+          {% for image in product.images.all %}
+          <div class="carousel-item {% if forloop.first %}active{% endif %}">
+            <img src="{{ image.image.url }}"
+                 class="product-media"
+                 alt="{{ product.name }}">
+          </div>
+          {% endfor %}
+
+        </div>
+
+        {% if product.images.count > 1 %}
+        <div class="carousel-indicators">
+          {% for image in product.images.all %}
+          <button type="button"
+                  data-bs-target="#productCarousel"
+                  data-bs-slide-to="{{ forloop.counter0 }}"
+                  class="{% if forloop.first %}active{% endif %}">
+          </button>
+          {% endfor %}
+        </div>
+        {% endif %}
+
+      </div>
+
+    {% else %}
+      <!-- FALLBACK -->
+      <div class="media-box text-muted">
+        No preview available
+      </div>
+    {% endif %}
+
+  </div>
 </div>
 
-      </div>
-    </div>
 
-    <!-- RIGHT: INFO -->
-    <div class="col-md-6">
 
-      <h1 class="product-detail-title">{{ product.name }}</h1>
+    <!-- RIGHT: PRODUCT INFO (Smaller) -->
+    <div class="col-lg-5">
 
-      <div class="product-detail-price">
+      <h1 class="product-detail-title mb-2">{{ product.name }}</h1>
+
+      <div class="product-detail-price mb-3">
         ₹{{ product.starting_price }}
+        {% if product.price_note %}
+          <span class="text-muted small">({{ product.price_note }})</span>
+        {% endif %}
       </div>
 
-      <p class="product-detail-desc">
-        Share your special moments with a beautifully designed mobile video invitation,
-        customized just for your wedding celebrations.
-      </p>
+      <!-- Product Description -->
+      {% if product.description %}
+        <div class="card border-0 shadow-sm mb-4 p-4 bg-white">
+          <p class="mb-0 text-muted" style="line-height: 1.8;">
+            {{ product.description|linebreaks }}
+          </p>
+        </div>
+      {% endif %}
 
-      <div class="product-steps">
-        <h6>Information required after order:</h6>
-        <ul>
-          <li>Groom & Bride Names (with surname)</li>
-          <li>Number of functions in the video</li>
-          <li>Date, day & time of function</li>
-          <li>Venue / Address</li>
-          <li>Family background details</li>
-          <li>RSVP details (optional)</li>
-          <li>Contact numbers</li>
+      <div class="card border-0 shadow-sm p-4 bg-white mb-4">
+        <h6 class="fw-semibold mb-3">Order Details:</h6>
+        <ul class="small mb-0">
+          <li>Product specifications and preferences</li>
+          <li>Customization details (if applicable)</li>
+          <li>Delivery address</li>
+          <li>Contact information</li>
+          <li>Any special requirements</li>
         </ul>
       </div>
 

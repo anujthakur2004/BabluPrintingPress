@@ -1,0 +1,86 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}
+<title>Business Essentials | Bablu Printing Press</title>
+{% endblock %}
+
+{% block content %}
+
+<!-- ================= HERO ================= -->
+<section class="business-hero">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-7">
+                <h1>Business Essentials</h1>
+                <p>
+                    Professional printing solutions for businesses — from visiting cards
+                    and office stationery to promotional materials and packaging prints.
+                </p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ================= SUBCATEGORIES ================= -->
+<section class="py-5">
+    <div class="container">
+
+        <div class="row g-4">
+            {% for category in business_categories %}
+            <div class="col-sm-6 col-lg-4">
+
+                {% if category.parent %}
+                <a href="{% url 'catalog:product_list' category.parent.slug category.slug %}" class="text-decoration-none">
+                {% else %}
+                <a href="{% url 'catalog:subcategory_list' category.slug %}" class="text-decoration-none">
+                {% endif %}
+
+                    <div class="business-category-card">
+
+                        <!-- Category Header -->
+                        <div class="mb-3">
+                            <h3 class="mb-1">{{ category.name }}</h3>
+                            <span class="category-count">
+                                {{ category.products.count }} products
+                            </span>
+                        </div>
+
+                        <!-- Product Image Preview -->
+                        <div class="category-preview-images">
+                            {% for product in category.products.all|slice:":3" %}
+                                {% with product.images.first as img %}
+                                    {% if img %}
+                                        <img src="{{ img.image.url }}" alt="{{ product.name }}">
+                                    {% else %}
+                                        <div class="category-preview-placeholder">
+                                            {{ product.name|slice:":1" }}
+                                        </div>
+                                    {% endif %}
+                                {% endwith %}
+                            {% empty %}
+                                <div class="text-muted small">No products yet</div>
+                            {% endfor %}
+                        </div>
+
+                        <!-- CTA -->
+                        <div class="category-action">
+                            View all →
+                        </div>
+
+                    </div>
+                </a>
+
+            </div>
+            {% empty %}
+            <div class="col-12 text-center text-muted">
+                No categories available.
+            </div>
+            {% endfor %}
+        </div>
+
+    </div>
+</section>
+
+
+{% endblock %}

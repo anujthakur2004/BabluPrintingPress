@@ -1,10 +1,260 @@
 {% extends "base.html" %}
 
 {% block title %}
-  <title>Home - Bablu Printing Press</title>
+    <title>Bablu Printing Press | Custom Cards & Printing</title>
 {% endblock title %}
 
 {% block content %}
-  {% comment %} <h1>Welcome to Bablu Printing Press</h1>
-  <p>Your one-stop shop for all printing needs.</p> {% endcomment %}
+{% load static %}
+
+<!-- ================= HOME HERO ================= -->
+<section class="hero-section">
+    <div class="container">
+        <div class="row align-items-center gy-4">
+
+            <!-- LEFT CONTENT -->
+            <div class="col-lg-7">
+                <span class="hero-badge">
+                    Trusted Printing Partner
+                </span>
+
+                <h1 class="hero-title">
+                    Premium Wedding Cards  <br>
+                    & Business Printing           
+                </h1>
+
+                <p class="hero-subtitle">
+                    From elegant wedding invitations to professional business essentials —
+                    printed with precision, delivered with care.
+                </p>
+
+                <div class="hero-actions">
+                    <a href="https://wa.me/919417044419"
+                       class="btn btn-success btn-lg">
+                        WhatsApp Enquiry
+                    </a>
+
+                    <a href="/catalog/wedding-cards/"
+                       class="btn btn-outline-dark btn-lg">
+                        Browse Wedding Cards
+                    </a>
+                </div>
+
+                <div class="hero-trust">
+                    ✔ Fast Delivery &nbsp; • &nbsp;
+                    ✔ Custom Designs &nbsp; • &nbsp;
+                    ✔ Nationwide Shipping
+                </div>
+            </div>
+
+            <!-- RIGHT VISUAL -->
+<div class="col-lg-5">
+    <div class="hero-trust-card">
+
+        <div class="trust-brand">
+            <span class="trust-since">Since 1991</span>
+            <h3>Bablu Printing Press</h3>
+            <p>Quality Printing You Can Trust</p>
+        </div>
+
+        <div class="trust-points">
+            <div>✔ Premium Materials</div>
+            <div>✔ Custom Designs</div>
+            <div>✔ Timely Delivery</div>
+        </div>
+
+    </div>
+</div>
+
+        </div>
+    </div>
+</section>
+
+
+
+<!-- New Arrivals -->
+<section class="py-5">
+    <div class="container">
+        <div class="d-flex justify-content-between align-items-center mb-3">
+            <h2 class="h4 mb-0">New Arrivals</h2>
+            <a class="text-danger fw-semibold" href="/catalog/wedding-cards/">View all</a>
+        </div>
+        <div class="row g-3 row-cols-1 row-cols-sm-2 row-cols-lg-5">
+            {% for product in new_products|slice:":5" %}
+                <div class="col">
+                    <div class="card h-100 shadow-sm border-0">
+                        <a href="{% url 'catalog:product_detail' product.slug %}" class="text-decoration-none text-dark">
+                            <div class="thumb ratio ratio-3x4 bg-light">
+                                {% with product.images.first as img %}
+                                    {% if img %}
+                                        <img src="{{ img.image.url }}" class="w-100 h-100 object-fit-cover" alt="{{ product.name }}">
+                                    {% else %}
+                                        {% with product.videos.first as vid %}
+                                            {% if vid %}
+                                                <video muted loop playsinline class="w-100 h-100 object-fit-cover">
+                                                    <source src="{{ vid.video.url }}" type="video/mp4">
+                                                </video>
+                                            {% else %}
+                                                <div class="d-flex align-items-center justify-content-center text-muted small">No preview</div>
+                                            {% endif %}
+                                        {% endwith %}
+                                    {% endif %}
+                                {% endwith %}
+                            </div>
+                            <div class="card-body text-center">
+                                <h6 class="card-title mb-1">{{ product.name }}</h6>
+                                {% if product.starting_price %}
+                                    <p class="text-danger fw-bold mb-0">₹{{ product.starting_price }}</p>
+                                {% endif %}
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            {% empty %}
+                <p class="text-muted">No products available.</p>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+
+<!-- Video Invitations -->
+<section class="py-5 bg-light">
+    <div class="container">
+        <div class="d-flex justify-content-between align-items-center mb-3">
+            <h2 class="h4 mb-0">Video Invitations</h2>
+            <a class="text-danger fw-semibold" href="/catalog/video-invitations/">See all</a>
+        </div>
+        <div class="row g-3 row-cols-1 row-cols-sm-2 row-cols-lg-4">
+            {% for product in video_invites|slice:":4" %}
+                <div class="col">
+                    <div class="card h-100 shadow-sm border-0">
+                        <a href="{% url 'catalog:product_detail' product.slug %}" class="text-decoration-none text-dark">
+                            <div class="thumb ratio ratio-3x4 bg-dark">
+                                {% with product.videos.first as vid %}
+                                    {% if vid %}
+                                        <video muted loop playsinline class="w-100 h-100 object-fit-cover">
+                                            <source src="{{ vid.video.url }}" type="video/mp4">
+                                        </video>
+                                    {% else %}
+                                        {% with product.images.first as img %}
+                                            {% if img %}
+                                                <img src="{{ img.image.url }}" class="w-100 h-100 object-fit-cover" alt="{{ product.name }}">
+                                            {% endif %}
+                                        {% endwith %}
+                                    {% endif %}
+                                {% endwith %}
+                            </div>
+                            <div class="card-body text-center">
+                                <h6 class="card-title mb-1">{{ product.name }}</h6>
+                                {% if product.starting_price %}
+                                    <p class="text-danger fw-bold mb-0">₹{{ product.starting_price }}</p>
+                                {% endif %}
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            {% empty %}
+                <p class="text-muted">No video invites yet.</p>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+
+<!-- Business Essentials -->
+<section class="py-5">
+    <div class="container">
+
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <h2 class="h4 mb-0">Business Essentials</h2>
+            <a class="text-danger fw-semibold" href="/catalog/business-essentials/">Browse</a>
+        </div>
+
+        <div class="row g-3 row-cols-1 row-cols-sm-2 row-cols-lg-4">
+            {% for product in business_products|slice:":4" %}
+            <div class="col">
+                <div class="card h-100 shadow-sm border-0">
+                    <a href="{% url 'catalog:product_detail' product.slug %}" class="text-decoration-none text-dark">
+                        <div class="product-card-media">
+                            {% with product.images.first as img %}
+                                {% if img %}
+                                    <img src="{{ img.image.url }}" alt="{{ product.name }}">
+                                {% else %}
+                                    {% with product.videos.first as vid %}
+                                        {% if vid %}
+                                            <video muted loop playsinline>
+                                                <source src="{{ vid.video.url }}" type="video/mp4">
+                                            </video>
+                                        {% endif %}
+                                    {% endwith %}
+                                {% endif %}
+                            {% endwith %}
+                        </div>
+                        <div class="card-body text-center">
+                            <h6 class="card-title mb-1">{{ product.name }}</h6>
+                            {% if product.starting_price %}
+                                <p class="text-danger fw-bold mb-0">₹{{ product.starting_price }}</p>
+                            {% endif %}
+                        </div>
+                    </a>
+                </div>
+            </div>
+            {% empty %}
+            <p class="text-muted">Business essentials coming soon.</p>
+            {% endfor %}
+        </div>
+
+    </div>
+</section>
+
+
+
+<!-- Wedding Cards by Budget -->
+<section class="py-5 bg-light">
+    <div class="container">
+        <div class="d-flex justify-content-between align-items-center mb-3">
+            <h2 class="h4 mb-0">Wedding Cards by Budget</h2>
+        </div>
+        <div class="row g-3">
+            <div class="col-12 col-lg-4">
+                <div class="card h-100 shadow-sm border-0">
+                    <div class="card-body">
+                        <h5 class="card-title">₹10 – 20</h5>
+                        <div class="row g-2 row-cols-2 row-cols-md-3">
+                            {% for product in wedding_10_20 %}
+                                <div class="col"><span class="small">{{ product.name }}</span></div>
+                            {% empty %}<p class="text-muted small">No items.</p>{% endfor %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-12 col-lg-4">
+                <div class="card h-100 shadow-sm border-0">
+                    <div class="card-body">
+                        <h5 class="card-title">₹20 – 30</h5>
+                        <div class="row g-2 row-cols-2 row-cols-md-3">
+                            {% for product in wedding_20_30 %}
+                                <div class="col"><span class="small">{{ product.name }}</span></div>
+                            {% empty %}<p class="text-muted small">No items.</p>{% endfor %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-12 col-lg-4">
+                <div class="card h-100 shadow-sm border-0">
+                    <div class="card-body">
+                        <h5 class="card-title">₹30 – 40</h5>
+                        <div class="row g-2 row-cols-2 row-cols-md-3">
+                            {% for product in wedding_30_40 %}
+                                <div class="col"><span class="small">{{ product.name }}</span></div>
+                            {% empty %}<p class="text-muted small">No items.</p>{% endfor %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
 {% endblock content %}

@@ -7,22 +7,60 @@
 <div class="container my-5">
   <h1 class="mb-4">{{ category.name }}</h1>
 
-  <div class="row g-4">
-    {% for sub in subcategories %}
-      <div class="col-md-4">
-        <a href="{% url 'catalog:product_list' category.slug sub.slug %}"
-           class="text-decoration-none">
-          <div class="card h-100 shadow-sm">
-            <div class="card-body text-center">
-              <h5 class="card-title">{{ sub.name }}</h5>
-              <p class="text-muted">View designs</p>
+  <!-- Direct Products in this category -->
+  {% if direct_products %}
+  <section class="mb-5">
+    <h3 class="mb-3">All {{ category.name }}</h3>
+    <div class="row g-3 row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4">
+      {% for product in direct_products %}
+      <div class="col">
+        <div class="card h-100 shadow-sm border-0">
+          <a href="{% url 'catalog:product_detail' product.slug %}" class="text-decoration-none text-dark">
+            <div class="product-card-media">
+              {% with product.images.first as img %}
+                {% if img %}
+                  <img src="{{ img.image.url }}" alt="{{ product.name }}">
+                {% endif %}
+              {% endwith %}
             </div>
-          </div>
-        </a>
+            <div class="card-body text-center">
+              <h6 class="card-title mb-1">{{ product.name }}</h6>
+              {% if product.starting_price %}
+                <p class="text-danger fw-bold mb-0">₹{{ product.starting_price }}</p>
+              {% endif %}
+            </div>
+          </a>
+        </div>
       </div>
-    {% empty %}
-      <p>No categories available.</p>
-    {% endfor %}
-  </div>
+      {% endfor %}
+    </div>
+  </section>
+  {% endif %}
+
+  <!-- Subcategories -->
+  {% if subcategories %}
+  <section>
+    <h3 class="mb-3">Browse by Type</h3>
+    <div class="row g-4">
+      {% for sub in subcategories %}
+        <div class="col-md-4">
+          <a href="{% url 'catalog:product_list' category.slug sub.slug %}"
+             class="text-decoration-none">
+            <div class="card h-100 shadow-sm">
+              <div class="card-body text-center">
+                <h5 class="card-title">{{ sub.name }}</h5>
+                <p class="text-muted">View designs</p>
+              </div>
+            </div>
+          </a>
+        </div>
+      {% endfor %}
+    </div>
+  </section>
+  {% endif %}
+
+  {% if not direct_products and not subcategories %}
+    <p class="text-muted">No products or categories available.</p>
+  {% endif %}
 </div>
 {% endblock %}

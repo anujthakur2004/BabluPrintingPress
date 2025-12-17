@@ -3,43 +3,117 @@
 
 {% block content %}
 <div class="container my-5">
-
-  <h1 class="mb-4">{{ subcategory.name }}</h1>
-
-  <div class="row g-4">
-    {% for product in products %}
-    <div class="col-md-3 col-sm-6">
-      <div class="product-card h-100">
-      <a href="{% url 'catalog:product_detail' product.slug %}" class="text-decoration-none text-dark">
-
-        <div class="product-media">
-          {% with product.images.first as img %}
-            {% if img %}
-              <img src="{{ img.image.url }}" alt="{{ product.name }}">
-            {% else %}
-              {% with product.videos.first as vid %}
-                {% if vid %}
-                  <video muted autoplay loop playsinline>
-                    <source src="{{ vid.video.url }}" type="video/mp4">
-                  </video>
-                {% endif %}
-              {% endwith %}
-            {% endif %}
-          {% endwith %}
-        </div>
-
-        <div class="p-3 text-center">
-          <h6 class="product-title">{{ product.name }}</h6>
-          <p class="product-price">₹{{ product.starting_price }}</p>
-        </div>
-
-      </a>
-    </div>
-    </div>
-    {% empty %}
-      <p>No products found.</p>
-    {% endfor %}
+  <!-- Header with Title and Description -->
+  <div class="mb-5">
+    <h1 class="display-6 fw-semibold mb-3">{{ subcategory.name }}</h1>
+    <p class="text-muted lead">
+      Discover our premium collection of {{ subcategory.name|lower }}. Crafted with precision, 
+      vibrant colors, and premium materials to bring your vision to life. 
+      Explore our diverse range of customizable options perfect for any occasion.
+    </p>
   </div>
 
+  <div class="row g-4">
+    <!-- Sidebar - Filters -->
+    <div class="col-lg-3">
+      <div class="border rounded p-4">
+        <h5 class="fw-semibold mb-4">Filters</h5>
+
+        <!-- Price Filter -->
+        <div class="mb-4">
+          <h6 class="fw-semibold mb-3">Price Range</h6>
+          <form method="get" id="price-filter-form">
+            <div class="mb-3">
+              <div class="d-flex justify-content-between mb-2">
+                <small class="text-muted">₹<span id="min-price-display">0</span></small>
+                <small class="text-muted">₹<span id="max-price-display">5000</span></small>
+              </div>
+              <input type="range" id="min-price" name="min_price" min="0" max="5000" 
+                     value="{{ request.GET.min_price|default:'0' }}" class="form-range" 
+                     onchange="updatePriceDisplay()">
+              <input type="range" id="max-price" name="max_price" min="0" max="5000" 
+                     value="{{ request.GET.max_price|default:'5000' }}" class="form-range mt-2"
+                     onchange="updatePriceDisplay()">
+            </div>
+            <button type="submit" class="btn btn-sm btn-outline-danger w-100">Apply Filter</button>
+          </form>
+        </div>
+
+        <hr>
+
+        <!-- Sort Options -->
+        <div>
+          <h6 class="fw-semibold mb-3">Sort By</h6>
+          <form method="get">
+            {% for sort_value, sort_label in sort_options %}
+              <div class="form-check mb-2">
+                <input class="form-check-input" type="radio" name="sort" 
+                       id="sort_{{ sort_value }}" value="{{ sort_value }}"
+                       {% if request.GET.sort == sort_value or sort_value == 'popular' and not request.GET.sort %}checked{% endif %}
+                       onchange="this.form.submit()">
+                <label class="form-check-label" for="sort_{{ sort_value }}">
+                  {{ sort_label }}
+                </label>
+              </div>
+            {% endfor %}
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <!-- Products Grid -->
+    <div class="col-lg-9">
+      <div class="mb-3">
+        <p class="text-muted small">Showing <strong>{{ products.count }}</strong> products</p>
+      </div>
+
+      <div class="row g-4">
+        {% for product in products %}
+        <div class="col-sm-6 col-lg-4">
+          <div class="card h-100 shadow-sm border-0">
+            <a href="{% url 'catalog:product_detail' product.slug %}" class="text-decoration-none text-dark">
+              <div class="product-card-media">
+                {% with product.images.first as img %}
+                  {% if img %}
+                    <img src="{{ img.image.url }}" alt="{{ product.name }}">
+                  {% else %}
+                    {% with product.videos.first as vid %}
+                      {% if vid %}
+                        <video muted loop playsinline>
+                          <source src="{{ vid.video.url }}" type="video/mp4">
+                        </video>
+                      {% endif %}
+                    {% endwith %}
+                  {% endif %}
+                {% endwith %}
+              </div>
+
+              <div class="card-body text-center">
+                <h6 class="card-title mb-2" style="min-height: 45px; word-wrap: break-word; overflow-wrap: break-word;">{{ product.name }}</h6>
+                <p class="text-danger fw-bold mb-0">₹{{ product.starting_price }}</p>
+              </div>
+            </a>
+          </div>
+        </div>
+        {% empty %}
+          <div class="col-12">
+            <p class="text-center text-muted">No products found.</p>
+          </div>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
 </div>
+
+<script>
+function updatePriceDisplay() {
+  const minPrice = document.getElementById('min-price').value;
+  const maxPrice = document.getElementById('max-price').value;
+  document.getElementById('min-price-display').textContent = minPrice;
+  document.getElementById('max-price-display').textContent = maxPrice;
+}
+
+// Initialize on page load
+document.addEventListener('DOMContentLoaded', updatePriceDisplay);
+</script>
 {% endblock %}

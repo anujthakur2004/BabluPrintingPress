@@ -121,10 +121,12 @@ USE_TZ = True
 
 STATIC_URL = "/static/"
 
-STATICFILES_DIRS = [    
-    BASE_DIR / "static",
+# Project static (where your css/style.css lives)
+STATICFILES_DIRS = [
+    BASE_DIR / "BabluPrintingPress" / "static",
 ]
 
+# Collected static for deployment (use `python manage.py collectstatic`)
 STATIC_ROOT = BASE_DIR / "staticfiles"
 
 MEDIA_URL = "/media/"
@@ -163,10 +165,13 @@ JAZZMIN_SETTINGS = {
 
     "theme": "lumen", 
 }
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = [
     "139.59.90.122",
     "babluprintingpress.live",
     "www.babluprintingpress.live",
+    "127.0.0.1",
+    "localhost",
+
 ]
