@@ -25,7 +25,7 @@
 
                 <p class="hero-subtitle">
                     From elegant wedding invitations to professional business essentials —
-                    printed with precision, delivered with care.
+                    printed with precision, shipped with care.
                 </p>
 
                 <div class="hero-actions">
@@ -41,9 +41,9 @@
                 </div>
 
                 <div class="hero-trust">
-                    ✔ Fast Delivery &nbsp; • &nbsp;
+                    ✔ Fast Shipping &nbsp; • &nbsp;
                     ✔ Custom Designs &nbsp; • &nbsp;
-                    ✔ Nationwide Shipping
+                    ✔ Nationwide Coverage
                 </div>
             </div>
 
@@ -60,7 +60,7 @@
         <div class="trust-points">
             <div>✔ Premium Materials</div>
             <div>✔ Custom Designs</div>
-            <div>✔ Timely Delivery</div>
+            <div>✔ Timely Shipping</div>
         </div>
 
     </div>
@@ -91,7 +91,7 @@
                                     {% else %}
                                         {% with product.videos.first as vid %}
                                             {% if vid %}
-                                                <video muted loop playsinline class="w-100 h-100 object-fit-cover">
+                                                <video autoplay muted loop playsinline class="w-100 h-100 object-fit-cover">
                                                     <source src="{{ vid.video.url }}" type="video/mp4">
                                                 </video>
                                             {% else %}
@@ -133,7 +133,7 @@
                             <div class="thumb ratio ratio-3x4 bg-dark">
                                 {% with product.videos.first as vid %}
                                     {% if vid %}
-                                        <video muted loop playsinline class="w-100 h-100 object-fit-cover">
+                                        <video autoplay muted loop playsinline class="w-100 h-100 object-fit-cover">
                                             <source src="{{ vid.video.url }}" type="video/mp4">
                                         </video>
                                     {% else %}
@@ -183,7 +183,7 @@
                                 {% else %}
                                     {% with product.videos.first as vid %}
                                         {% if vid %}
-                                            <video muted loop playsinline>
+                                            <video autoplay muted loop playsinline>
                                                 <source src="{{ vid.video.url }}" type="video/mp4">
                                             </video>
                                         {% endif %}

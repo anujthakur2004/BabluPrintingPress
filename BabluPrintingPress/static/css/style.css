@@ -806,6 +806,11 @@ body {
 .hero-trust {
     font-size: .9rem;
     color: #495057;
+    display: flex;
+    flex-wrap: nowrap;
+    gap: 8px;
+    overflow-x: auto;
+    white-space: nowrap;
 }
 
 /* ===== Hero Trust Card ===== */
@@ -869,10 +874,32 @@ body {
 
 /* Hero mobile adjustments */
 @media (max-width: 576px) {
-  .hero-section { padding: 48px 0; }
-  .hero-title { font-size: 1.8rem; }
-  .hero-subtitle { font-size: .95rem; max-width: none; }
-  .hero-actions .btn { padding: .5rem .9rem; }
+  .hero-section { padding: 40px 0 32px; }
+  .hero-title { font-size: 1.6rem; line-height: 1.25; }
+  .hero-subtitle { font-size: .9rem; max-width: none; margin-bottom: 20px; }
+  .hero-actions { gap: 10px; }
+  .hero-actions .btn { 
+    padding: .6rem 1rem; 
+    font-size: .85rem;
+    width: 100%;
+  }
+  .hero-badge { font-size: .75rem; padding: 5px 12px; margin-bottom: 12px; }
+  .hero-trust { 
+    font-size: .75rem; 
+    gap: 4px;
+    justify-content: flex-start;
+  }
+  
+  /* Product cards mobile */
+  .card { border-radius: 12px; }
+  .thumb { border-radius: 10px; }
+  .card-title { font-size: .9rem; }
+  .card-body { padding: .75rem; }
+  
+  /* Section headings mobile */
+  section .h4 { font-size: 1.1rem; }
+  section .py-5 { padding-top: 2rem !important; padding-bottom: 2rem !important; }
+  section.bg-light { padding-top: 2rem !important; padding-bottom: 2rem !important; }
 }
 
 /* Footer mobile spacing */
