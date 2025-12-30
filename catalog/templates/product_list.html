@@ -29,8 +29,8 @@
           <form method="get" id="price-filter-form">
             <div class="mb-3">
               <div class="d-flex justify-content-between mb-2">
-                <small class="text-muted">₹<span id="min-price-display">0</span></small>
-                <small class="text-muted">₹<span id="max-price-display">5000</span></small>
+                <small class="text-muted"><i class="bi bi-currency-rupee" aria-hidden="true"></i><span id="min-price-display">0</span></small>
+                <small class="text-muted"><i class="bi bi-currency-rupee" aria-hidden="true"></i><span id="max-price-display">5000</span></small>
               </div>
               <input type="range" id="min-price" name="min_price" min="0" max="5000" 
                      value="{{ request.GET.min_price|default:'0' }}" class="form-range" 
@@ -94,7 +94,7 @@
 
               <div class="card-body text-center">
                 <h6 class="card-title mb-2" style="min-height: 45px; word-wrap: break-word; overflow-wrap: break-word;">{{ product.name }}</h6>
-                <p class="text-danger fw-bold mb-0">₹{{ product.starting_price }}</p>
+                <p class="text-danger fw-bold mb-0"><i class="bi bi-currency-rupee" aria-hidden="true"></i>{{ product.starting_price }}</p>
               </div>
             </a>
           </div>

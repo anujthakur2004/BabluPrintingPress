@@ -75,7 +75,7 @@
       <h1 class="product-detail-title mb-2">{{ product.name }}</h1>
 
       <div class="product-detail-price mb-3">
-        ₹{{ product.starting_price }}
+        <i class="bi bi-currency-rupee" aria-hidden="true"></i>{{ product.starting_price }}
         {% if product.price_note %}
           <span class="text-muted small">({{ product.price_note }})</span>
         {% endif %}

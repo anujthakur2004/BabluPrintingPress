@@ -104,7 +104,7 @@
                             <div class="card-body text-center">
                                 <h6 class="card-title mb-1">{{ product.name }}</h6>
                                 {% if product.starting_price %}
-                                    <p class="text-danger fw-bold mb-0">₹{{ product.starting_price }}</p>
+                                    <p class="text-danger fw-bold mb-0"><i class="bi bi-currency-rupee" aria-hidden="true"></i>{{ product.starting_price }}</p>
                                 {% endif %}
                             </div>
                         </a>
@@ -148,7 +148,7 @@
                             <div class="card-body text-center">
                                 <h6 class="card-title mb-1">{{ product.name }}</h6>
                                 {% if product.starting_price %}
-                                    <p class="text-danger fw-bold mb-0">₹{{ product.starting_price }}</p>
+                                    <p class="text-danger fw-bold mb-0"><i class="bi bi-currency-rupee" aria-hidden="true"></i>{{ product.starting_price }}</p>
                                 {% endif %}
                             </div>
                         </a>
@@ -194,7 +194,7 @@
                         <div class="card-body text-center">
                             <h6 class="card-title mb-1">{{ product.name }}</h6>
                             {% if product.starting_price %}
-                                <p class="text-danger fw-bold mb-0">₹{{ product.starting_price }}</p>
+                                <p class="text-danger fw-bold mb-0"><i class="bi bi-currency-rupee" aria-hidden="true"></i>{{ product.starting_price }}</p>
                             {% endif %}
                         </div>
                     </a>
@@ -220,7 +220,7 @@
             <div class="col-12 col-lg-4">
                 <div class="card h-100 shadow-sm border-0">
                     <div class="card-body">
-                        <h5 class="card-title">₹10 – 20</h5>
+                        <h5 class="card-title"><i class="bi bi-currency-rupee" aria-hidden="true"></i>10 – 20</h5>
                         <div class="row g-2 row-cols-2 row-cols-md-3">
                             {% for product in wedding_10_20 %}
                                 <div class="col"><span class="small">{{ product.name }}</span></div>
@@ -232,7 +232,7 @@
             <div class="col-12 col-lg-4">
                 <div class="card h-100 shadow-sm border-0">
                     <div class="card-body">
-                        <h5 class="card-title">₹20 – 30</h5>
+                        <h5 class="card-title"><i class="bi bi-currency-rupee" aria-hidden="true"></i>20 – 30</h5>
                         <div class="row g-2 row-cols-2 row-cols-md-3">
                             {% for product in wedding_20_30 %}
                                 <div class="col"><span class="small">{{ product.name }}</span></div>
@@ -244,7 +244,7 @@
             <div class="col-12 col-lg-4">
                 <div class="card h-100 shadow-sm border-0">
                     <div class="card-body">
-                        <h5 class="card-title">₹30 – 40</h5>
+                        <h5 class="card-title"><i class="bi bi-currency-rupee" aria-hidden="true"></i>30 – 40</h5>
                         <div class="row g-2 row-cols-2 row-cols-md-3">
                             {% for product in wedding_30_40 %}
                                 <div class="col"><span class="small">{{ product.name }}</span></div>
